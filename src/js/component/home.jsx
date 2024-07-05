@@ -1,37 +1,24 @@
 import React, { useState } from "react";
-
-//include images into your bundle
-import rigoImage from "../../img/rigo-baby.jpg";
-
-//create your first component
+import {InputBox} from "./InputBox";
+import { ListedTaskCreator } from "./ListedTaskCreator";
+//Home componenet used to hold all of my project
 const Home = () => {
 	const[inputValue,setInputValue] = useState("")
 	const[todos, setTodos] = useState([])
+	//start of building html elements using javascript and react to render
 	return (
 		<div className="container">
-			<h1>My Todos</h1><h1 placeholder="Task"> {inputValue}</h1>
+			{/* header that says title mixed with the current task inputed */}
+			<h1>My To Do List</h1><h1 placeholder="Task"> {inputValue}</h1>
 			<ul>
-				<li>
-					<input
-						type="text"
-						onChange={(event)=> setInputValue(event.target.value)}
-						value={inputValue}
-						onKeyDown={(event) =>{
-							if(event.key ==="Enter"){
-								setTodos(todos.concat(inputValue));
-							}
-						}}
-						placeholder="what do you need to do?"></input>
-				</li>
-		{todos.map((item,index) =>(
-			<li>
-				{item} <i className="fas fa-trash-alt align-items-center" onClick={() => setTodos(todos.filter((t,currentIndex )=> index != currentIndex))}></i>
-			</li>
-		))}
+				{/* first use of the inputBox component. the component is holding the input box. i used this because its good practice and helps code look better */}
+				<InputBox inputValue={inputValue} setTodos={setTodos} todos={todos} setInputValue={setInputValue}/>
+				{/* this is a different component. the component is used to create the new list item task. i used this to help clean up the code but it is  */}
+				<ListedTaskCreator todos={todos} setTodos={setTodos}/>
 			</ul>
-			<div>{todos.length} tasks</div>
+		{/* this is a counter of the amount of tasks */}
+		<div>{todos.length} tasks</div>
 		</div>
-	);
-};
+);};
 
 export default Home;
