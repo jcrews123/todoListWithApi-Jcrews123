@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+
 //css file
 import "../styles/index.css";
 //home is entire component that gets rendered
